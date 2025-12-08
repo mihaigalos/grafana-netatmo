@@ -12,7 +12,11 @@ weatherData = lnetatmo.WeatherStationData(authorization)
 
 influxdb2_org=os.getenv('INFLUXDB2_ORG', "Home")
 influxdb2_token=os.getenv('INFLUXDB2_TOKEN', "token")
-client = InfluxDBClient(url="http://192.168.1.86:8086", token=influxdb2_token, org=influxdb2_org, verify_ssl=False)
+influxdb2_url = os.getenv('INFLUXDB_URL', 'http://localhost:8086')
+influxdb2_verify_ssl = os.getenv('INFLUXDB_VERIFY_SSL', True)
+
+client = InfluxDBClient(url=influxdb2_url, token=influxdb2_token, org=influxdb2_org, verify_ssl=influxdb2_verify_ssl)
+
 # if {'name': 'netatmo'} not in client.get_list_database():
 #     client.create_database('netatmo')
 

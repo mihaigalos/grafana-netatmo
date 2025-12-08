@@ -70,13 +70,14 @@ for station in weatherData.stations:
                 })
 
     print("\n\n----------------------------------- Station data -----------------------------------")
-    print(station_data)
+    # print(*station_data, sep="\n")
     print("\n\n----------------------------------- Module data -----------------------------------")
     print(*module_data, sep="\n")
 
 
-    write_api.write(bucket=bucket, record=station_data, time_precision='s')
+    # write_api.write(bucket=bucket, record=station_data, time_precision='s')
     write_api.write(bucket=bucket, record=module_data, time_precision='s')
+    print("✅ Data pushed")
 
     # client.write_points(station_data, time_precision='s', database='netatmo')
     # client.write_points(module_data, time_precision='s', database='netatmo')

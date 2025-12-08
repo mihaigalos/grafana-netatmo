@@ -8,7 +8,8 @@ _setup:
 
 
 run_influx:
-  docker run -p 8086:8086 \
+  docker run --rm -it -d -p 8086:8086 \
+    --name=influxdb2 \
     -v "$PWD/data:/var/lib/influxdb2" \
     -v "$PWD/config:/etc/influxdb2" \
     -v "$PWD/scripts:/docker-entrypoint-initdb.d" \

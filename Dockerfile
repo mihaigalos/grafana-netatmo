@@ -13,16 +13,14 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# RUN pip install setuptools
+RUN useradd -m -u 1001 -s /bin/bash user
+USER user
+WORKDIR /home/user
+
 RUN pip3 install --break-system-packages pytz influxdb-client requests lnetatmo
 
-# Environment vars
 ENV PYTHONIOENCODING=utf-8
+ADD netatmo_influx.py .
+ADD get.sh .
 
-# Copy files
-ADD netatmo_influx.py /
-
-ADD get.sh /
-
-# Run
-CMD ["/bin/bash","/get.sh"]
+CMD ["/bin/bash","get.sh"]
